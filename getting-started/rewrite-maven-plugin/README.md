@@ -7,7 +7,7 @@ description: Applying Rewrite recipes to your code with the Rewrite plugin for M
 The quickest way to see value from pre-packaged Rewrite recipes is to incorporate the Rewrite Maven \(or [Gradle](../rewrite-gradle-plugin.md)\) plugin to your build and run a Maven goal that transforms your code locally.
 
 {% hint style="success" %}
-The Rewrite Maven plugin automatically supplies any recipes you configure to run with all source files in the project that are transformable. It will supply Java visitors with Java files, XML visitors with XML files, etc.
+The Rewrite Maven plugin automatically supplies all the transformable source files in the project to any recipes you have configured to run. It will supply Java visitors with Java files, XML visitors with XML files, etc.
 {% endhint %}
 
 The Rewrite Maven plugin offers four goals:

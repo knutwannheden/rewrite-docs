@@ -6,13 +6,14 @@ description: List all AST elements that refer by name to a type.
 
 ### Definition
 
-`FindType` lists all AST elements that refer by name to a particular class name referred to by a sub-tree. It does not support listing references to primitive types.
+`FindType` searches through a given AST and adds a marker to any elements of the specified type. It then returns a set of those marked elements.
+Note that `FindType` does not support listing references to primitive types.
 
 ```java
 J.CompilationUnit cu = ...
 
 // all the types referred to in a source file
-Set<JavaType.Class> anywhereInFile = new FindTypes("java.util.List")
+Set<NameTree> anywhereInFile = new FindTypes("java.util.List")
   .visit(cu);
 ```
 
@@ -31,12 +32,16 @@ public class Sample {
 }
 ```
 
+{% hint style="info" %}
+Use `SearchResult.PRINTER` to print out the modified AST after running `FindType`. This will insert an arrow before each instance of the given type that was found.
+{% endhint %}
+
 Other examples of potential matches include \(not an exhaustive list\):
 
 * `List::add`
 * `MyType.genericSignature<List<String>>()`
-* `catch(IllegalArgumentException e)` - Matches on `java.lang.IllegalArgumentException`
 * `List[]`
 * `new List<String>() { }` - An anonymous class declaration
 * `(List<String>) collection` - A typecast
+* `catch(IllegalArgumentException e)` - Matches on `java.lang.IllegalArgumentException`
 

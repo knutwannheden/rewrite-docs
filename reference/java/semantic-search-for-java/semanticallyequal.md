@@ -20,21 +20,20 @@ description: Determine semantic equality between two abstract syntax trees.
 J.Annotation annot;
 J.Annotation otherAnnot;
 
-SemanticallyEqual semEq = new SemanticallyEqual(annot);
-Boolean isEqual = semEq.visit(otherAnnot);
+Boolean isEqual = SemanticallyEqual.areEqual(annot, otherAnnot);
 ```
 
 ## Example
 
-This example is in Kotlin. It demonstrates how both the annotation type and arguments must be checked for equality
+This example is in Kotlin. It demonstrates how both the annotation type and arguments must be checked for equality.
 
-`@Tag(FastTests.class)` and `@Tag(value = FastTests.class)` would be semantically equal because the latter is a syntactic sugaring of the former. `@Tag(SlowTests.class)` is not semantically equal to either because its argument is different.
+While the IDs of the first two `@Tag` annotations are different, `SemanticallyEqual` compares uses the annotation type and the arguments to determine that they are indeed semantically equal. `@Tag(SlowTests.class)` is not semantically equal to either because its argument is different.
 
 ```kotlin
 val cu = jp.parse(
     """
         @Tag(FastTests.class)
-        @Tag(value = FastTests.class)
+        @Tag(FastTests.class)
         @Tag(SlowTests.class)
         class A {}
     """,
@@ -57,7 +56,7 @@ val fastTest = cu[0].classes[0].annotations[0]
 val fastTest2 = cu[0].classes[0].annotations[1]
 val slowTest = cu[0].classes[0].annotations[2]
 
-assertThat(SemanticallyEqual(fastTest).visit(fastTest2)).isTrue()
-assertThat(SemanticallyEqual(fastTest).visit(slowTest)).isFalse()
+assertThat(SemanticallyEqual.areEqual(fastTest, fastTest2)).isTrue()
+assertThat(SemanticallyEqual.areEqual(fastTest, slowTest)).isFalse()
 ```
 
