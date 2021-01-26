@@ -60,7 +60,7 @@
   * [UnnecessaryParentheses](reference/checkstyle/unnecessaryparentheses.md)
 * [Java](reference/java/README.md)
   * [Semantic Search for Java](reference/java/semantic-search-for-java/README.md)
-    * [FindAnnotations](reference/java/semantic-search-for-java/findannotations.md)
+    * [FindAnnotations](reference/java/semantic-search-for-java/findannotation.md)
     * [FindFields](reference/java/semantic-search-for-java/findfields.md)
     * [FindInheritedFields](reference/java/semantic-search-for-java/findinheritedfields.md)
     * [FindMethods](reference/java/semantic-search-for-java/findmethods.md)
